@@ -17,6 +17,8 @@ const ContactUs = ({ setSelectedPage }: Props) => {
     if (!isValid) e.preventDefault();
   };
 
+  const inputStyles = `w-full rounded-lg bg-primary-300 px-5 py-3 placeholder-white mt-5`;
+
   return (
     <section id="contactus" className="mx-auto w-5/6 pt-24 pb-32">
       <motion.div
@@ -60,7 +62,67 @@ const ContactUs = ({ setSelectedPage }: Props) => {
               onSubmit={onSubmit}
               method="POST"
               action="https://formsubmit.co/felipemdantas@terra.com.br"
-            ></form>
+            >
+              <input
+                type="text"
+                className={inputStyles}
+                placeholder="NAME"
+                {...register("name", {
+                  required: true,
+                  maxLength: 100,
+                })}
+              />
+              {errors.name && (
+                <p className="mt-1 text-primary-500">
+                  {errors.name.type === "required" && "This field is required."}
+                  {errors.name.type === "maxLength" &&
+                    "Max length is 100 characters."}
+                </p>
+              )}
+
+              <input
+                type="text"
+                className={inputStyles}
+                placeholder="EMAIL"
+                {...register("email", {
+                  required: true,
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                })}
+              />
+              {errors.email && (
+                <p className="mt-1 text-primary-500">
+                  {errors.email.type === "required" &&
+                    "This field is required."}
+                  {errors.email.type === "pattern" && "Invalid email address."}
+                </p>
+              )}
+
+              <textarea
+                rows={4}
+                cols={50}
+                className={inputStyles}
+                placeholder="MESSAGE"
+                {...register("message", {
+                  required: true,
+                  maxLength: 2000,
+                })}
+              />
+              {errors.message && (
+                <p className="mt-1 text-primary-500">
+                  {errors.message.type === "required" &&
+                    "This field is required."}
+                  {errors.message.type === "maxLength" &&
+                    "Max length is 2000 characters."}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="mt-5 rounded-lg bg-secondary-500 px-20 py-3 transition duration-500 hover:text-white"
+              >
+                SUBMIT
+              </button>
+            </form>
           </motion.div>
         </div>
       </motion.div>
