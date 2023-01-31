@@ -12,6 +12,10 @@
 
 > This is a stylish gym-related SPA (single-page application).
 
+### Take a look at the page
+
+<img src = images/page_gif.gif>
+
 ## Tech
 
 A couple of technologies were employed in this project. Among them:
